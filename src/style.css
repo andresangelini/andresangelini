@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis&display=swap');
+
+:root {
+  
+  /* Color names */
+  --bittersweet: #fc6767;
+  --hollywood-cerise: #ec008c;
+  --electric-violet: #920DE0;
+  
+  /* Color definitions */
+  --primary-color: var(--bittersweet);
+  --secondary-color: var(--hollywood-cerise);
+  --tertiary-color: var(--electric-violet);
+}
+
+/*
+ *
+ * Declare font-size in percentage at root level so that
+ * it scales when zooming in our out or changing the browser's
+ * default settings
+ *
+ * Choose 62.5% to make calculations easier. Browser's default
+ * font-size is usually set at 16px. However, 10px is a much
+ * easier number to work with. 10px is just 62.5% of 16px.
+ *
+ * For more info, check out:
+ * 
+ * https://css-tricks.com/rems-ems/
+*/
+
+:root {
+  font-size: 62.5%;
+}
+
+/*
+ * Instead of using rem for all the elements in the page so
+ * that they adjust according to a global declaration at the
+ * root level, we'll divide things into modules. The modules
+ * will use rem and their children em. In toher words, the
+ * modules' font-size will depend on the root's and their
+ * children's will depend on their modules'.
+ *
+ * For more info:
+ * 
+ * https://medium.com/code-better/css-units-for-font-size-px-em-rem-79f7e592bb97
+*/
+
+/* Root level adjustments */
+@media (max-width: 900px) {
+  :root { font-size: 50%; } /* 50% = 8px */
+}
+
+html {
+  /* HTML must be relative and it's height need to be 100%
+   * so that the #welcom-section can have its height relative
+   * to it
+  */
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: "Dosis";
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  height: 200px;
+  width: 200px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid black;
+}
+
+/* Modules will scale with document */
+.navbar {
+  font-size: 1rem;
+}
+.footer {
+  font-size: 0.75rem;
+}
+
+/* Type will scale with modules */
+h1 {
+  font-size: 4em;
+}
+h2 {
+  font-size: 3.5em;
+}
+h3 {
+  font-size: 3em;
+}
+h4 {
+  font-size: 2.5em;
+}
+
+p, a, li {
+  font-size: 2rem;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+  margin: 0;
+  padding: 0;
+  background-color: var(--tertiary-color);
+}
+
+.navbar-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  float: right;
+  margin: 0;
+}
+
+.navbar-btn:hover {
+  background-color: var(--primary-color);
+}
+
+.btn-link-list {
+  list-style: none;
+}
+
+.btn-link {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  padding: 2rem;
+}
+
+.section {
+  box-sizing: border-box;
+  min-width: 100%;
+  margin: 0;
+  padding: 2em;
+}
+
+.section-title {
+  margin-top: 1.5em; /* Compensate for navbar's height */
+  text-align: center;
+}
+
+.fullscreen {
+  /* Make sure it always takes the full height of the
+  browser window */
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: var(--secondary-color);  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, var(--primary-color), var(--secondary-color));  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, var(--primary-color), var(--secondary-color)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.welcome-section p {
+  text-align: center;
+}
+
+.about-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-section a {
+  color: var(--primary-color);
+}
+
+.about-section a:visited {
+  color: var(--tertiary-color);
+}
+
+.about-text {
+  text-align: center;
+  width: 60%;
+}
+
+.about-pic {
+  border-radius: 50%;
+  width: 200px;
+}
+
+.skills-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-color: var(--primary-color);
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 60%;
+  list-style: none;
+  padding: 0;
+}
+
+.skill {
+  padding: 1em;
+}
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  max-width: 100em;
+  margin: 0 auto;
+  /* Prevent AOS "fade-left" and "fade-right" from leeking through
+   * and creating extra white space on the sides
+  */
+  overflow-x: hidden;
+}
+
+.project-tile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 80em;
+}
+
+.project-tile:nth-child(odd) {
+  align-self: flex-end;
+}
+
+.project-tile:nth-child(even) .project-image {
+  order: 1;
+}
+
+.project-tile:nth-child(even) {
+  align-self: flex-start;
+}
+
+.project-image,
+.project-details {
+  box-sizing: border-box;
+  width: 50%;
+}
+
+.project-details {
+  padding: 0 2em;
+}
+
+.project-link {
+  display: block;
+  background-color: var(--primary-color);
+}
+
+.project-link:hover {
+  background-color: var(--tertiary-color);
+}
+
+.contact-section {
+  color: white;
+  background-color: var(--primary-color);
+}
+
+.contact-profiles {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 0 4em 0;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  padding: 1em 4em;
+}
+
+.fa-heart {
+  color: var(--primary-color);
+}
+
+@media screen and (max-width: 690px) {   
+  .project-tile {
+    flex-direction: column;
+    align-items: center;
+    width: 436px;
+  }
+  
+  .project-tile:nth-child(odd) {
+    align-self: center;
+  }
+
+  .project-tile:nth-child(even) .project-image {
+    order: initial;
+  }
+
+  .project-tile:nth-child(even) {
+    align-self: center;
+  }
+  
+  .project-image,
+  .project-details {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-links {
+    width: 100%;
+  }
+  
+  .navbar .btn-link {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .about-pic {
+    width: 150px;
+  }
+  
+  .project-tile {
+    width: 100%;
+  }
+  
+  /*
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  */
+  .contact-profiles {
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+  }
+  
+  .footer p {
+    text-align: center;
+    width: 100%;
+  }
+}
